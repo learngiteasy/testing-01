@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Spring Boot Crud Web App Using Thymeleaf[Front End]</h1>
+<a th:href="@{/showemployeeform}" class="btn btn-primary">ADD EMPLOYEE</a>
+ 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">EmailId</th>
+      
+      <th scope="col">Gender</th>
+      <th scope="col">Country Name</th>
+        <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="ob:${users}">
+     <td th:text="${obStat.index+1}"></td>
+     <td th:hidden="${ob.userId}"></td>
+      <td th:text="${ob.firstName}"></td>
+       <td th:text="${ob.lastName}"></td>
+        <td th:text="${ob.emailId}"></td>
+        <td th:text="${ob.gender}"></td>
+       <td th:text="${ob.countryName}"></td>
+         <td><a th:href="@{/showeditform/{id}(id=${ob.userId})}">EDIT</a> <a th:href="@{/deleterecord/{id}(id=${ob.userId})}">DELETE</a>  </td>
+    </tr>
+    
+  </tbody>
+</table>
+</body>
+</html>

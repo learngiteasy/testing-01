@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+ window.onload=loadCountry;
+ function loadCountry(){
+		
+	  $.ajax({
+		url:"/countryrecord",
+		success:function(data,status){
+			let countryName=Object.values(data);
+			//var f='th:field="*{countryName}"'
+			var s="<option value=" +-1+ ">--Select Country</option>";
+			countryName.forEach(data=>{
+			   s=s+"<option value="+data+" required>"+data+"</option>";	
+			})
+			$("#country").html(s);
+		}
+	  }
+	  
+	  );
+ }
+ 
+$(document).ready(function(){
+	$("#country").change(function(){
+		var value=$("#country").val();
+		alert(value.length);
+	});
+});
+
+</script>
+</head>
+<body>
+<h1>EDIT EMPLOYEE DETAILS</h1>
+<p th:text="${user}"></p>
+<form th:action="@{/saveemployee}" th:object="${user}" method="POST">
+ <input type="hidden" th:field="*{userId}" placeholder="type first name here"  /> <br>
+   
+    <input required type="text" th:field="*{firstName}" placeholder="type first name here"  /> <br>
+    <input required type="text" th:field="*{lastName}" placeholder="type second name here" /> <br>
+    <input required type="text" th:field="*{emailId}" placeholder="type emailid here" /> <br>
+   <select  id="country" th:field="*{countryName}" class="form-select" aria-label="Default select example">
+  </select>
+
+<br>
+<div class="form-check">
+  <input value="Male" th:field="*{gender}" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Male
+  </label>
+</div>
+<div class="form-check">
+  <input value="Female" th:field="*{gender}" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+  <label class="form-check-label" for="flexRadioDefault2">
+    Female
+  </label>
+</div>
+    <button>Edit</button>
+</form>
+</body>
+</html>
