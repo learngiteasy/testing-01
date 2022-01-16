@@ -1,1 +1,2 @@
-Apple is blue
+Apple is blue.
+Mangio is black.
